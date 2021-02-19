@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net48</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="0.10.0" />
+    <PackageReference Include="Avalonia.Desktop" Version="0.10.0" />
+    <PackageReference Include="Avalonia.Diagnostics" Version="0.10.0" />
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0" PrivateAssets="All" />
+   </ItemGroup>
+   <Target Name="SkiaSharpRemoveMusl" BeforeTargets="BeforeBuild">
+      <ItemGroup>
+         <Content Remove="@(Content)" Condition="$([System.Text.RegularExpressions.Regex]::IsMatch('%(FullPath)', 'packages.*linux-musl.*so')) "/>
+      </ItemGroup>
+   </Target>
+</Project>
